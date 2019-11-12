@@ -3,10 +3,22 @@ import queries from '../../db';
 
 const router = Router();
 
-router.get('/:id?', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         let list = await queries.Items.storeItems();
         res.json(list);
+    } catch (e) {
+        console.log(e)
+        res.sendStatus(500);
+    }
+});
+
+router.get('/:id', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        let list = await queries.Items.oneStoreItems(id);
+        res.json(list);
+        console.log('list', list)
     } catch (e) {
         console.log(e)
         res.sendStatus(500);

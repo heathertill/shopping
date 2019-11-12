@@ -14,6 +14,16 @@ const Nav: React.SFC<NavProps> = () => {
         }
     };
 
+    const adminView = () => {
+        if (User.role === 'admin') {
+            return (
+                <li className="nav-item mx-3">
+                    <Link className="text-white" to="/admin">Manage</Link>
+                </li>
+            )
+        }
+    }
+
     const logout = () => {
         ClearAccessToken();
         location.reload();
@@ -24,21 +34,18 @@ const Nav: React.SFC<NavProps> = () => {
             <ul className="nav col-12 my-3 py-3 bg-dark justify-content-between">
                 <div className="nav">
                     <li className="nav-item mx-3">
-                        {/* <Link className="text-white" to="/login">Login</Link> */}
                         {checkStatus()}
                     </li>
                     <li className="nav-item mx-3">
                         <Link className="text-white" to="/">Home</Link>
                     </li>
-                    <li className="nav-item mx-3">
-                        <Link className="text-white" to="/manage">Manage</Link>
-                    </li>
+                    {adminView()}
                 </div>
                 <li className="nav item mx-3">
                     <Link className="text-white" to="/register">Register</Link>
                 </li>
             </ul>
-            <div className="jumbotron jumbotron-fluid col-12 my-3">
+            <div className="jumbotron jumbotron-fluid col-12 mb-3">
                 <h1 className="text-center">Shopping</h1>
             </div>
 

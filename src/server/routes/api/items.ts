@@ -49,7 +49,7 @@ router.put('/id', async (req, res, next) => {
     }
 });
 
-router.delete('/id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
     let id = req.params.id;
     try {
         await queries.Items.deleteItem(id);

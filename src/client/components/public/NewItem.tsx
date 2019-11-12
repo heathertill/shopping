@@ -15,8 +15,12 @@ const NewItem: React.SFC<NewItemProps> = () => {
             item
         }
         try {
+            let storeid = 0;
+            let body =  {storeid} ;
             let result = await json('/api/items', 'POST', newItem)
             if (result) {
+                console.log('result/new', result[0])
+                let r2 = await json(`/api/lists/${result[0]}`, 'PUT', body)
                 location.reload();
             } else {
                 return <div className="alert">There was a problem! Please try again.</div>
@@ -25,8 +29,6 @@ const NewItem: React.SFC<NewItemProps> = () => {
             console.log(e)
         }
     };
-
-
 
     return (
         <section className="bg-light mb-3 mx-n3 p-5">

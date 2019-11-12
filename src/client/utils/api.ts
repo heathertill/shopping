@@ -1,4 +1,5 @@
 export let AccessToken: string = localStorage.getItem('token') || null;
+
 export let User: any = {
     userid: localStorage.getItem('userid') || null,
     role: localStorage.getItem('role') || null

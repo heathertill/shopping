@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { json } from '../../utils/api';
+import {Link} from 'react-router-dom';
+import { json, User } from '../../utils/api';
 import { AllStores, Item } from '../../views/MainView';
 import * as io from 'socket.io-client';
 
@@ -25,6 +26,18 @@ const StoreLists: React.SFC<StoresProps> = ({ store: { id, store } }) => {
         }
     }
 
+    const toList = () => {
+            if (User.role === 'admin') {
+                return <Link to={`/singleList/${id}`} className="card-header bg-light text-black d-flex w-100">{store}</Link>
+        }
+    }
+
+    const notToList = () => {
+        if (User.role !== 'admin') {
+            return <div className="card-header bg-light d-flex w-100">{store}</div>
+        }
+    }
+
     useEffect(() => { getItems() }, []);
 
     useEffect(() => {
@@ -36,16 +49,17 @@ const StoreLists: React.SFC<StoresProps> = ({ store: { id, store } }) => {
     }, [])
 
     return (
-            <div className="storeCard card ml-3 mr-0" key={id}>
-                <div className="card-header bg-light d-flex w-100">{store}</div>
-                <ul className="list-group list-group-flush p-3">
-                    {itemList.map(item => {
-                        return (
-                            <li className="list-group-item" key={item.id}>{item.item}</li>
-                        )
-                    })}
-                </ul>
-            </div>
+        <div className="storeCard card ml-3 mr-0" key={id}>
+            {toList()}
+            {notToList()}
+            <ul className="list-group list-group-flush p-3">
+                {itemList.map(item => {
+                    return (
+                        <li className="list-group-item"  key={item.id}>{item.item}</li>
+                    )
+                })}
+            </ul>
+        </div>
     );
 }
 

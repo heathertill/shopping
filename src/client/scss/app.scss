@@ -1,11 +1,14 @@
 @import './overrides.scss';
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 
-
 .covalence-blue {
     color: #0091ea;
 }
 
 .storeCard {
-    width: 11em
+    width: 11em;
+}
+
+#store0 {
+    color: red;
 }
