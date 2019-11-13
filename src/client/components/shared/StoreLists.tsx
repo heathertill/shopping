@@ -6,11 +6,11 @@ import { AllStores, Item } from '../../views/MainView';
 import * as io from 'socket.io-client';
 
 
-export interface StoresProps {
+export interface StoreListsProps {
     store: AllStores
 }
 
-const StoreLists: React.SFC<StoresProps> = ({ store: { id, store } }) => {
+const StoreLists: React.SFC<StoreListsProps> = ({ store: { id, store } }) => {
 
 
     const [items, setItems] = useState<Item[]>([]);

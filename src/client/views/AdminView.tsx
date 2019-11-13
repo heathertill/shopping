@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Item, AllStores } from './MainView';
-import { json } from '../utils/api';
+import { json, User } from '../utils/api';
 import List from '../components/shared/List';
 import StoreLists from '../components/shared/StoreLists';
+import NewStore from '../components/admin/NewStore';
+import AdminNav from '../components/admin/AdminNav';
 
 export interface AdminViewProps { }
 
@@ -13,6 +15,12 @@ const AdminView: React.SFC<AdminViewProps> = () => {
     const [stores, setStores] = useState<AllStores[]>([]);
 
     let storeList = stores.filter(obj => obj.id > 0)
+
+    const adminNav = () => {
+        if (User.role === 'admin') {
+            return <AdminNav />
+        }
+    }
 
     const getItems = async () => {
         try {
@@ -28,15 +36,23 @@ const AdminView: React.SFC<AdminViewProps> = () => {
     useEffect(() => { getItems() }, []);
 
     return (
-        <div className="row">
-            <div className="col-3 bg-light p-1 mx-0">
-                <h3 className="p-2 text-center">Shopping List</h3>
-                <ul className="list-group list-group-flush mx-0 p-0">
-                    {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} />)}
-                </ul>
-            </div>
-            <div className="card-deck col-9 justify-content-between p-0 mx-0">
-                {storeList.map(store => <StoreLists key={store.id} store={store} />)}
+        <div>
+            <AdminNav />
+            <div className="row aaa">
+                <div className="col-3 bg-light p-1 mx-0">
+                    <h3 className="p-2 text-center">Shopping List</h3>
+                    <ul className="list-group list-group-flush mx-0 p-0">
+                        {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} />)}
+                    </ul>
+                </div>
+                <div className="card-deck col-9 justify-content-between p-0 mx-0">
+                    <div>
+                        {storeList.map(store => <StoreLists key={store.id} store={store} />)}
+                    </div>
+                    <div className="card">
+                        {/* <NewStore /> */}
+                    </div>
+                </div>
             </div>
         </div>
     );
