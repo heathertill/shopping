@@ -1,15 +1,15 @@
 import * as React from 'react';
 import ReactDom from 'react-dom';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Form from '../public/Form';
 
-export interface CustomModal {
+export interface CustomModalProps {
     isShowing: any,
     hide: any,
-    id: number
+    id: any
 }
-
-const CustomModal = ({ isShowing, hide, id }) => isShowing ? ReactDom.createPortal(
+ 
+const CustomModal: React.SFC<CustomModalProps> = ({ isShowing, hide, id }) => isShowing ? ReactDom.createPortal(
     <>
         <Modal isOpen={isShowing} toggle={hide}>
             <ModalHeader>
@@ -24,5 +24,5 @@ const CustomModal = ({ isShowing, hide, id }) => isShowing ? ReactDom.createPort
         </Modal>
     </>, document.body
 ) : null;
-
+ 
 export default CustomModal;

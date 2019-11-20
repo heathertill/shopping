@@ -55,7 +55,7 @@ const StoreLists: React.SFC<StoreListsProps> = ({ store: { id, store } }) => {
             <ul className="list-group list-group-flush p-3">
                 {itemList.map(item => {
                     return (
-                        <li className="list-group-item"  key={item.id}>{item.item}</li>
+                        <li className="list-group-item" key={item.id}>{item.item}</li>
                     )
                 })}
             </ul>

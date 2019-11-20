@@ -22,12 +22,13 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
 
     const [stores, setStores] = useState<Store[]>([]);
 
+    const storeList = stores.filter(obj => obj.id > 0)
+
 
     const getStores = async () => {
         try {
             let stores = await json('/api/stores')
             setStores(stores);
-            console.log('stores', stores)
         } catch (e) {
             console.log(e)
         }
@@ -41,7 +42,7 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
                 <select className="form-control col mr-2" value={values.storeid}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handlers.setStoreid(Number(e.target.value))}>
                     <option>Select a Store</option>
-                    {stores.map(store => {
+                    {storeList.map(store => {
                         return (
                             <option key={store.id} value={store.id}>{store.store}</option>
                         )

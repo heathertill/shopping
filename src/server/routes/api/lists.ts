@@ -18,7 +18,6 @@ router.get('/:id', async (req, res, next) => {
     try {
         let list = await queries.Items.oneStoreItems(id);
         res.json(list);
-        console.log('list', list)
     } catch (e) {
         console.log(e)
         res.sendStatus(500);
