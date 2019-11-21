@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -13,9 +14,28 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
 
     const notAllowed = () => {
         if (!logStatus) {
-            return <div className="alert alert-danter p-1 m-3">Invalid Credentials</div>
+            Swal.fire({
+                title: 'Invalid Credentials!',
+                showConfirmButton: false,
+                timer: 1500,
+                onClose: () => {
+                    location.reload();
+                }
+            })
         }
     };
+
+    const wayToGo = () => {
+        Swal.fire({
+            title: 'You are logged in!',
+            timer: 1500,
+            showConfirmButton: false,
+            onClose: () => {
+                history.push('/');
+                    location.reload();
+            }
+        })
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -29,8 +49,9 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role })
                 if (result.role) {
                     setLogStatus(true);
-                    history.push('/');
-                    location.reload();
+                    wayToGo()
+                    // history.push('/');
+                    // location.reload();
                 }
             } else {
                 setLogStatus(false);

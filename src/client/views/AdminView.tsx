@@ -38,7 +38,7 @@ const AdminView: React.SFC<AdminViewProps> = () => {
     return (
         <div>
             <AdminNav />
-            <div className="row aaa">
+            <div className="row" id="adminView">
                 <div className="col-3 bg-light p-1 mx-0">
                     <h3 className="p-2 text-center">Shopping List</h3>
                     <ul className="list-group list-group-flush mx-0 p-0">

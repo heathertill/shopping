@@ -28,13 +28,13 @@ const StoreLists: React.SFC<StoreListsProps> = ({ store: { id, store } }) => {
 
     const toList = () => {
             if (User.role === 'admin') {
-                return <Link to={`/singleList/${id}`} className="card-header bg-light text-black d-flex w-100">{store}</Link>
+                return <Link to={`/singleList/${id}`} className="card-header bg-light text-black d-flex w-100" id="list">{store}</Link>
         }
     }
 
     const notToList = () => {
         if (User.role !== 'admin') {
-            return <div className="card-header bg-light d-flex w-100">{store}</div>
+            return <div className="card-header bg-light d-flex w-100" id="list">{store}</div>
         }
     }
 
@@ -49,7 +49,7 @@ const StoreLists: React.SFC<StoreListsProps> = ({ store: { id, store } }) => {
     }, [])
 
     return (
-        <div className="storeCard card ml-3 mr-0" key={id}>
+        <div className="storeCard card ml-3 mr-0" id="storeLists" key={id}>
             {toList()}
             {notToList()}
             <ul className="list-group list-group-flush p-3">

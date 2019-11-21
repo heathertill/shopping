@@ -9,15 +9,15 @@ export interface FormProps {
     cantsee: any,
 }
 
-export interface AllStores {
-    id: number,
-    store: string
-}
+// export interface AllStores {
+//     id: number,
+//     store: string
+// }
 
 const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
 
     const [item, setItem] = useState('');
-    const [storeid, setStoreid] = useState(0);
+    const [storeid, setStoreid] = useState<number>(undefined);
 
     const getItem = async () => {
         try {

@@ -11,7 +11,7 @@ import SingleList from './components/admin/SingleList';
 import AdminView from './views/AdminView';
 import StoreLists from './components/shared/StoreLists';
 import NewStore from './components/admin/NewStore';
-import OneList from './components/admin/OneList';
+// import OneList from './components/admin/OneList';
 
 export interface AppProps { }
 
