@@ -6,12 +6,11 @@ import MainView from './views/MainView';
 import Nav from './components/shared/Nav';
 import Login from './components/admin/Login';
 import Register from './components/admin/Register';
-import NewItem from './components/public/NewItem';
 import SingleList from './components/admin/SingleList';
 import AdminView from './views/AdminView';
 import StoreLists from './components/shared/StoreLists';
 import NewStore from './components/admin/NewStore';
-// import OneList from './components/admin/OneList';
+import AdminNav from './components/admin/AdminNav';
 
 export interface AppProps { }
 
@@ -21,7 +20,7 @@ const App: React.SFC<AppProps> = () => {
         <BrowserRouter>
             <main className="container px-0">
                 <Nav />
-                {/* <NewItem /> */}
+                <AdminNav />
                 <Switch>
                     <Route exact path='/' component={MainView} />
                     <Route exact path='/admin' component={AdminView} />
@@ -30,7 +29,6 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/singleList' component={SingleList} />
                     <Route exact path='/storelist' component={StoreLists} />
                     <Route exact path='/newstore' component={NewStore} />
-                    {/* <Route exact path='/onelist' component={OneList} /> */}
                 </Switch>
             </main>
         </BrowserRouter>

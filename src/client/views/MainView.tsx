@@ -28,9 +28,6 @@ export interface AllStores {
 const MainView: React.SFC<MainViewProps> = () => {
 
     const [items, setItems] = useState<Item[]>([]);
-    const [stores, setStores] = useState<AllStores[]>([]);
-
-    let storeList = stores.filter(obj => obj.id > 0)
 
     const addNewItem = () => {
         if (User.role !== null) {
@@ -48,14 +45,13 @@ const MainView: React.SFC<MainViewProps> = () => {
         try {
             let items = await json('/api/lists');
             setItems(items);
-            let stores = await json('/api/stores');
-            setStores(stores);
+            console.log('mainview')
         } catch (e) {
             console.log(e)
         }
     };
 
-    useEffect(() => { getItems() }, []);
+    useEffect(() => { getItems() }, [items.length]);
 
     useEffect(() => {
         let socket = io.connect();
@@ -63,7 +59,7 @@ const MainView: React.SFC<MainViewProps> = () => {
         return () => {
             socket.disconnect();
         }
-    }, []);
+    }, [items.length]);
 
     return (
         <div className="row justify-content-between">

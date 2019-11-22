@@ -1,23 +1,21 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { Item } from '../../views/MainView';
 import { json } from '../../utils/api';
+import { handleMessage } from '../../utils/formService';
 import StoreSelector from '../shared/StoreSelector';
 
-export interface singleListProps extends RouteComponentProps { }
+export interface singleListProps {
+    item: Item
+}
 
-const SingleList: React.SFC<singleListProps> = ({ history }) => {
+const SingleList: React.SFC<singleListProps> = () => {
+
 
     const [items, setItems] = useState<Item[]>([]);
     const [storeid, setStoreid] = useState<number>(undefined);
-    const [storeName, setStoreName] = useState('')
+    const [storeName, setStoreName] = useState<string>('');
 
-
-    const handleStore = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setStoreid(storeid);
-    };
 
     const handleSelect = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -25,49 +23,45 @@ const SingleList: React.SFC<singleListProps> = ({ history }) => {
         try {
             let result = await json(`/api/lists/${id}`)
             setItems(result)
-            setStoreName(result.store)
-            console.log(result, 'and', storeName)
+            setStoreName(result[0].store)
         } catch (e) {
             console.log(e)
         }
     }
 
+    const handlePurchase = (e: any, item: string, phone: string, id: number) => {
+        console.log('your item has been purchased', id)
+        let message = 'Your requested item, ' + item + ', has been purchased.'
+        handleMessage(e, message, phone, id);
+    }
 
-    // const handleMessage = async (item: string, phone: string, itemid: number) => {
-    //     let message = 'Your requested item, ' + item + ' has been purchased.'
-    //     let text = {
-    //         to: phone,
-    //         body: message
-    //     }
-    //     try {
-    //         let result = await json('/twilio', 'POST', text)
-    //         if (result) {
-    //             console.log(message)
-    //             let done = json(`/api/items/${itemid}`, 'DELETE')
-    //             if (done) {
-    //                 console.log('item deleted')
-    //                 location.reload();
-    //             }
-    //         }
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
+    const handleDelete = (e: any, item: string, phone: string, id: number) => {
+        console.log('deleted')
+        let message = 'Your requested item, ' + item + ', has been deleted. Please contact admin for further info.';
+        handleMessage(e, message, phone, id);
+    }
 
 
     return (
         <section>
-            <div>
-                <StoreSelector handlers={{ setStoreid, handleStore }} values={{ storeid }} />
-                <button className="btn btn-dark m-2" onClick={handleSelect}>Save Store</button>
+            <div className="card p-3 mx-0 mb-3">
+                <StoreSelector handlers={{ setStoreid }} values={{ storeid }} />
+                <button className="btn btn-block btn-dark mx-auto m-2 w-75" onClick={handleSelect}>Show List</button>
             </div>
-            
-            <div className="border shadow">
-                <h3>Store list for {storeName}</h3>
+            <div className="border shadow ">
+                <h3 className="d-flex justify-content-center mt-3">Store list for: {storeName}</h3>
                 <ul className="list-group list-group-flush p-3">
                     {items.map(item => {
                         return (
-                            <li className="list-group-item" key={item.id}>{item.item}</li>
+                            <li className="list-group-item" key={item.id}>{item.item}
+                                <span className="float-right">
+                                    <button className="btn btn-dark mx-2"
+                                        onClick={(e) => handlePurchase(e, item.item, item.phone, item.id)}
+                                    >Confirm</button>
+                                    <button className="btn btn-dark mx-2"
+                                    onClick={(e) => handleDelete(e, item.item, item.phone, item.id)}>Delete</button>
+                                </span>
+                            </li>
                         )
                     })}
                 </ul>

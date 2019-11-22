@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User, ClearAccessToken } from '../../utils/api';
 
 export interface NavProps { }
 
 const Nav: React.SFC<NavProps> = () => {
+
+ 
 
     const checkStatus = () => {
         if (User.userid !== null) {
@@ -18,7 +21,7 @@ const Nav: React.SFC<NavProps> = () => {
         if (User.role === 'admin') {
             return (
                 <li className="nav-item mx-3">
-                    <Link className="text-white" to="/admin">Manage</Link>
+                    <Link className="text-white" to="/admin">Admin</Link>
                 </li>
             )
         }
@@ -39,7 +42,7 @@ const Nav: React.SFC<NavProps> = () => {
                     <li className="nav-item mx-3">
                         <Link className="text-white" to="/">Home</Link>
                     </li>
-                    {adminView()}
+                    {/* {adminView()} */}
                 </div>
                 <li className="nav item mx-3">
                     <Link className="text-white" to="/register">Register</Link>

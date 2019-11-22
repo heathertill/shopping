@@ -6,6 +6,7 @@ const useModal = () => {
     const [isShowing, setIsShowing] = useState<boolean>(false);
 
     function toggle() {
+        console.log('useModal toggle has been clicked')
         setIsShowing(!isShowing);
     };
 

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { json } from '../../utils/api';
+import { handleStores } from '../../utils/formService';
 
 
 export interface StoreSelectorProps {
     handlers: {
-        setStoreid: any,
-        handleStore: any
+        setStoreid: any
     };
     values: {
         storeid: number
@@ -24,14 +24,8 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
 
     const storeList = stores.filter(obj => obj.id > 0)
 
-
-    const getStores = async () => {
-        try {
-            let stores = await json('/api/stores')
-            setStores(stores);
-        } catch (e) {
-            console.log(e)
-        }
+    const getStores = () => {
+        handleStores(setStores)
     }
 
     useEffect(() => { getStores() }, [])
@@ -39,7 +33,7 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
     return (
         <>
             <div className="form-inline row m-2">
-                <select className="form-control col mr-2" value={values.storeid}
+                <select className="form-control col" value={values.storeid}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handlers.setStoreid(Number(e.target.value))}>
                     <option>Select a Store</option>
                     {storeList.map(store => {

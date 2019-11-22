@@ -6,6 +6,7 @@ import List from '../components/shared/List';
 import StoreLists from '../components/shared/StoreLists';
 import NewStore from '../components/admin/NewStore';
 import AdminNav from '../components/admin/AdminNav';
+import SingleList from '../components/admin/SingleList';
 
 export interface AdminViewProps { }
 
@@ -45,12 +46,12 @@ const AdminView: React.SFC<AdminViewProps> = () => {
                         {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} />)}
                     </ul>
                 </div>
-                <div className="card-deck col-9 justify-content-between p-0 mx-0">
-                    <div>
-                        {storeList.map(store => <StoreLists key={store.id} store={store} />)}
-                    </div>
-                    <div className="card">
-                        {/* <NewStore /> */}
+                <div className="card-deck col-9 justify-content-center p-0 mx-0">
+                    {/* <div> */}
+                        {/* {storeList.map(store => <StoreLists key={store.id} store={store} />)} */}
+                    {/* </div> */}
+                    <div className="card p-4">
+                        <SingleList />
                     </div>
                 </div>
             </div>

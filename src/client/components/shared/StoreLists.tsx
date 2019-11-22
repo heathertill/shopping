@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
-import { json, User } from '../../utils/api';
+import { Link } from 'react-router-dom';
+import { User } from '../../utils/api';
+import { handleItems } from '../../utils/formService';
 import { AllStores, Item } from '../../views/MainView';
 import * as io from 'socket.io-client';
 
@@ -12,23 +13,17 @@ export interface StoreListsProps {
 
 const StoreLists: React.SFC<StoreListsProps> = ({ store: { id, store } }) => {
 
-
     const [items, setItems] = useState<Item[]>([]);
 
     let itemList = items.filter(obj => obj.storeid == id)
 
-    const getItems = async () => {
-        try {
-            let items = await json('/api/lists');
-            setItems(items);
-        } catch (e) {
-            console.log(e);
-        }
+    const getItems = () => {
+        handleItems(setItems);
     }
 
     const toList = () => {
-            if (User.role === 'admin') {
-                return <Link to={`/singleList/${id}`} className="card-header bg-light text-black d-flex w-100" id="list">{store}</Link>
+        if (User.role === 'admin') {
+            return <Link to={`/singleList/${id}`} className="card-header bg-light text-black d-flex w-100" id="list">{store}</Link>
         }
     }
 

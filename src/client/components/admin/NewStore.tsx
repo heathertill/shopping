@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { json } from '../../utils/api';
+import { handleStores } from '../../utils/formService';
 import { Store } from '../shared/StoreSelector';
 
 export interface NewStoreProps {
@@ -14,14 +15,8 @@ const NewStore: React.SFC<NewStoreProps> = () => {
 
     let list = stores.filter(obj => obj.id > 0);
 
-    const storeList = async () => {
-        try {
-            let stores = await json('/api/stores');
-            setStores(stores);
-            console.log('newStore', stores)
-        } catch (e) {
-            console.log(e)
-        }
+    const storeList = () => {
+        handleStores(setStores)
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +62,7 @@ const NewStore: React.SFC<NewStoreProps> = () => {
                                 <div className="d-flex justify-content-between" key={store.id}>
                                     <li className="list-group-item d-inline col-12">{store.store}
                                         <button className="btn btn-dark btn-sm d-inline float-right"
-                                        onClick={(e) => handleDelete(e, store.id)}>Delete Store</button>
+                                            onClick={(e) => handleDelete(e, store.id)}>Delete Store</button>
                                     </li>
                                 </div>
                             )

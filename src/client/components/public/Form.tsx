@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { json } from '../../utils/api';
+import { handleItems } from '../../utils/formService';
 import StoreSelector from '../shared/StoreSelector';
 
 
 export interface FormProps {
     id: number,
-    cantsee: any,
+    cantsee: any
 }
-
-// export interface AllStores {
-//     id: number,
-//     store: string
-// }
 
 const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
 
@@ -29,8 +25,6 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
     };
 
     useEffect(() => { getItem() }, []);
-
-  
 
     const handleStore = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -58,7 +52,7 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
 
         <form className="form-group">
             <label htmlFor="user">{item}</label>
-            <StoreSelector handlers={{ setStoreid, handleStore }} values={{ storeid }} />
+            <StoreSelector handlers={{ setStoreid }} values={{ storeid }} />
             <button className="btn btn-dark m-2" onClick={handleText}>Save Store</button>
             <button className="btn btn-dark m-2" onClick={cantsee}>Close</button>
         </form>
