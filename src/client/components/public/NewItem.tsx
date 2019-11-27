@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { User, json } from '../../utils/api';
 
@@ -18,7 +19,8 @@ const NewItem: React.SFC<NewItemProps> = () => {
             let storeid = 0;
             let body = { storeid };
             let result = await json('/api/items', 'POST', newItem)
-            setItem('')
+            // setItem('')
+            location.reload()
             if (result) {
                 await json(`/api/lists/${result[0]}`, 'PUT', body)
             } else {

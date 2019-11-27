@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
 import { RouteComponentProps } from 'react-router-dom';
+import {wayToGo} from '../../utils/formService'
 
 export interface LoginProps extends RouteComponentProps { }
 
@@ -25,21 +26,8 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
         }
     };
 
-    const wayToGo = () => {
-        Swal.fire({
-            title: 'You are logged in!',
-            timer: 1500,
-            showConfirmButton: false,
-            onClose: () => {
-                history.push('/');
-                    location.reload();
-            }
-        })
-    }
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('email', email, 'password', password)
         try {
             let result = await json('/auth/login', 'POST', {
                 email,
@@ -49,9 +37,7 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role })
                 if (result.role) {
                     setLogStatus(true);
-                    wayToGo()
-                    // history.push('/');
-                    // location.reload();
+                    wayToGo(history.push('/'))
                 }
             } else {
                 setLogStatus(false);

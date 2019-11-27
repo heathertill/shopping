@@ -3,6 +3,7 @@ import * as multer from 'multer';
 import * as aws from 'aws-sdk';
 import * as multerS3 from 'multer-s3';
 import config from '../../config';
+import queries from '../../db';
 
 const router = Router();
 
@@ -30,7 +31,7 @@ const upload = multer({
         s3,
         bucket: 'heathers-projects',
         key: (req, file, cb) => {
-            cb(null, `${file.originalname}-${Date.now()}`)
+            cb(null, `shoppingImage-${file.originalname}`)
         },
         acl: 'public-read'
     })

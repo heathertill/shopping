@@ -1,7 +1,10 @@
 import * as React from 'react';
+import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom';
+import Image from './Image';
+// import { handleImage } from '../../utils/formService';
 
 export interface RegisterProps extends RouteComponentProps { }
 
@@ -26,8 +29,7 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
                     let result = await json('/auth/login', 'POST', body);
                     if (result) {
                         SetAccessToken(result.token, { userid: result.userid, role: result.role });
-                        history.push('/');
-                        location.reload();
+                        wayToGo()
                     } else {
                         setRegisterStatus(false);
                         ClearAccessToken();
@@ -43,6 +45,17 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
         }
     };
 
+    const wayToGo = () => {
+        Swal.fire({
+            title: 'Welcome! Let\'s get shopping',
+            timer: 1500,
+            showConfirmButton: false,
+            onClose: () => {
+                history.push('/image');
+            }
+        })
+    }
+
     const registrationError = () => {
     if (registerStatus === false) {
         return <div className="alert alert-danger">There was a problem registering! Please try again.</div>
@@ -51,7 +64,7 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
 
     return (
         <section className="container d-flex justify-content-center">
-            <div className="col-md-8 border rounded shadow-lg">
+            <div className="col-md-9 border rounded shadow-lg">
                 <form className="form-group p-3"
                     onSubmit={(e) => handleSubmit(e)}>
                     <label htmlFor="name">Name</label>

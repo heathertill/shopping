@@ -11,6 +11,7 @@ import AdminView from './views/AdminView';
 import StoreLists from './components/shared/StoreLists';
 import NewStore from './components/admin/NewStore';
 import AdminNav from './components/admin/AdminNav';
+import Image from './components/admin/Image';
 
 export interface AppProps { }
 
@@ -29,6 +30,7 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/singleList' component={SingleList} />
                     <Route exact path='/storelist' component={StoreLists} />
                     <Route exact path='/newstore' component={NewStore} />
+                    <Route exact path='/image' component={Image}m/>
                 </Switch>
             </main>
         </BrowserRouter>

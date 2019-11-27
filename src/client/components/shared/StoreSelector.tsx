@@ -28,6 +28,7 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
         handleStores(setStores)
     }
 
+    
     useEffect(() => { getStores() }, [])
 
     return (

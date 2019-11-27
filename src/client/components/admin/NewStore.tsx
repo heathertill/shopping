@@ -40,7 +40,6 @@ const NewStore: React.SFC<NewStoreProps> = () => {
         try {
             let result = json(`/api/stores/${id}`, 'DELETE');
             if (result) {
-                console.log('store deleted')
                 location.reload();
             }
         } catch (e) {

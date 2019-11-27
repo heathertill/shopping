@@ -21,18 +21,22 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
 
     return (
         <div className="row">
-            <ul className="nav col-12 mb-3 py-3 bg-dark justify-content-between">
+            <ul className="nav col-12 mb-3 py-3 bg-dark justify-content-end">
                 <div className="nav">
-                    <li className="nav-item mt-2 mx-3">
+                <li className="nav-item mx-3">
+                        {showText && <Link className="text-white " to="/image">Image</Link>}
+                    </li>
+                    <li className="nav-item mx-3">
                         {showText && <Link className="text-white " to="/newstore">Add Store</Link>}
                     </li>
-                    <li className="nav-item mx-3 mt-2">
-                        {showText && <Link className="text-white" to="/">Home</Link>}
+                    <li className="nav-item mx-3">
+                        {showText && <Link className="text-white" to="/">Main View</Link>}
+                    </li>
+                    <li className="nav item mx-3">
+                        {showText && <Link className="text-white" to="/admin">Admin View</Link>}
                     </li>
                 </div>
-                <li className="nav item mx-3">
-                    {/* <Link className="text-white" to="/register">Register</Link> */}
-                </li>
+
             </ul>
         </div >
     );

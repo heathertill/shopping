@@ -45,13 +45,12 @@ const MainView: React.SFC<MainViewProps> = () => {
         try {
             let items = await json('/api/lists');
             setItems(items);
-            console.log('mainview')
         } catch (e) {
             console.log(e)
         }
     };
 
-    useEffect(() => { getItems() }, [items.length]);
+    useEffect(() => { getItems() }, []);
 
     useEffect(() => {
         let socket = io.connect();
@@ -59,14 +58,14 @@ const MainView: React.SFC<MainViewProps> = () => {
         return () => {
             socket.disconnect();
         }
-    }, [items.length]);
+    }, []);
 
     return (
         <div className="row justify-content-between">
-            <div className="col-5 bg-light p-1 mx-0">
+            <div className="col-5 bg-light p-4 mx-0">
                 <h3 className="p-2 text-center">Shopping List</h3>
                 <ul className="list-group list-group-flush mx-0 p-0">
-                    {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} />)}
+                    {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} />)}
                 </ul>
             </div>
             <div className="col-6 ">
