@@ -19,7 +19,6 @@ export const handleItems = async (setItems: any) => {
     }
 };
 
-
 export const handleMessage = async (e: React.MouseEvent<HTMLButtonElement>, message: string, phone: string, itemid: number) => {
     e.preventDefault();
     let text = {
@@ -31,7 +30,6 @@ export const handleMessage = async (e: React.MouseEvent<HTMLButtonElement>, mess
         if (result) {
             let done = json(`/api/items/${itemid}`, 'DELETE')
             if (done) {
-                console.log('item deleted')
                 location.reload();
             }
         }

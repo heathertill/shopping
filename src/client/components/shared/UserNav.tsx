@@ -25,25 +25,12 @@ const UserNav: React.SFC<UserNavProps> = () => {
                         <li className="nav-item mx-3">
                             {showNav && <Link className="text-white " to={`/guestEdit/${User.userid}`}>Edit Profile</Link>}
                         </li>
-                        {/* <li className="nav-item mx-3">
-                        {showNav && <Link className="text-white " to="/newstore">Add Store</Link>}
-                    </li> */}
                         <li className="nav-item mx-3">
                             {showNav && <Link className="text-white" to="/">Main View</Link>}
                         </li>
-                        {/* <li className="nav item mx-3">
-                        {showNav && <Link className="text-white" to="/admin">Admin View</Link>}
-                    </li> */}
                     </div>
                 </ul>
             </div >}
-            {/* {!showNav &&
-                <div className="row">
-                    <ul className="nav col-12 mb-3 py-3 bg-dark justify-content-end">
-
-                    </ul>
-                </div>
-            } */}
         </>
     );
 }

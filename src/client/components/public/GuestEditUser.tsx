@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { getUser, handleUserUpdate, wayToGo } from '../../utils/formService';
-import { User, json } from '../../utils/api';
+import { getUser, handleUserUpdate } from '../../utils/formService';
+import { User } from '../../utils/api';
 import { GuestUser } from '../../views/MainView';
-import Image from '../admin/Image';
 
 export interface GuestEditUserProps extends RouteComponentProps<{ id: string }> { }
 
-const GuestEditUser: React.SFC<GuestEditUserProps> = ({ history, match: { params: { id } } }) => {
+const GuestEditUser: React.SFC<GuestEditUserProps> = ({ match: { params: { id } } }) => {
 
     const [user, setUser] = useState<GuestUser>({
         id: undefined,
@@ -23,7 +22,6 @@ const GuestEditUser: React.SFC<GuestEditUserProps> = ({ history, match: { params
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [role, setRole] = useState('');
-    const [image, setImage] = useState('');
 
     const handleUsers = () => {
         getUser(setUser, Number(id))
@@ -37,7 +35,7 @@ const GuestEditUser: React.SFC<GuestEditUserProps> = ({ history, match: { params
                     <div>
                         <label className="mt-2" htmlFor="email">Role</label>
                         <input type="text" className="form-control" value={role} placeholder={user.role}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} />
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRole(e.target.value)} />
                         <button type="submit" className="btn btn-dark my-3"
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleUserUpdate(e, Number(id), { role: role })}
                         >Update Role</button>

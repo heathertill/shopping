@@ -23,7 +23,6 @@ const List: React.SFC<ListProps> = ({ item: { id, item, image }, store }) => {
     }
 
     const alertItem = () => {
-        // if (User.role === 'admin') {
         return (
             <span className="d-flex justify-content-between">
                 <div id="avatarDiv">
@@ -33,9 +32,6 @@ const List: React.SFC<ListProps> = ({ item: { id, item, image }, store }) => {
             </span>
 
         )
-        // } else {
-        //     return <p className="m-0 p-2">{item}</p>
-        // }
     }
 
     return (

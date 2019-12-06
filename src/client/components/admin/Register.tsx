@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
-import { wayToGo, confirmButton } from '../../utils/formService';
 import { RouteComponentProps } from 'react-router-dom';
 
 export interface RegisterProps extends RouteComponentProps { }
@@ -24,7 +23,6 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
         }
         try {
             let r = await json('/auth/register', 'POST', body);
-            console.log('body', body)
             if (r) {
                 try {
                     let result = await json('/auth/login', 'POST', body);

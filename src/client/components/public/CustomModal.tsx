@@ -8,7 +8,7 @@ export interface CustomModalProps {
     hide: any,
     id: any
 }
- 
+
 const CustomModal: React.SFC<CustomModalProps> = ({ isShowing, hide, id }) => isShowing ? ReactDom.createPortal(
     <>
         <Modal isOpen={isShowing} toggle={hide}>
@@ -24,5 +24,5 @@ const CustomModal: React.SFC<CustomModalProps> = ({ isShowing, hide, id }) => is
         </Modal>
     </>, document.body
 ) : null;
- 
+
 export default CustomModal;

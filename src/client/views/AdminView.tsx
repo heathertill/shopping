@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Item, AllStores } from './MainView';
-import { json, User } from '../utils/api';
+import { Item } from './MainView';
+import { json } from '../utils/api';
 import List from '../components/shared/List';
 import SingleList from '../components/admin/SingleList';
 

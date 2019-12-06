@@ -81,7 +81,7 @@ const MainView: React.SFC<MainViewProps> = () => {
 
     return (
         <>
-            {/* {border()} */}
+            {border()}
             <div className="row justify-content-between">
                 <div className="col-5 bg-light p-4 mx-0">
                     <h3 className="p-2 text-center">Shopping List</h3>

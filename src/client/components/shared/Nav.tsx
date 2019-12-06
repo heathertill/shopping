@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { User, ClearAccessToken } from '../../utils/api';
 
@@ -40,12 +39,8 @@ const Nav: React.SFC<NavProps> = () => {
                     <li className="nav-item mx-3">
                         <Link className="text-white" to="/">Home</Link>
                     </li>
-                    {/* {adminView()} */}
                 </div>
                 {allowRegister()}
-                {/* <li className="nav item mx-3">
-                    <Link className="text-white" to="/register">Register</Link>
-                </li> */}
             </ul>
             <div className="jumbotron jumbotron-fluid col-12 mb-3">
                 <h1 className="text-center">Shopping</h1>

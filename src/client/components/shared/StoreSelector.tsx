@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { json } from '../../utils/api';
 import { handleStores } from '../../utils/formService';
-
 
 export interface StoreSelectorProps {
     handlers: {
@@ -28,7 +26,6 @@ const StoreSelector: React.SFC<StoreSelectorProps> = ({ handlers, values }) => {
         handleStores(setStores)
     }
 
-    
     useEffect(() => { getStores() }, [])
 
     return (

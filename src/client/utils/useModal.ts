@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 const useModal = () => {
 
     const [isShowing, setIsShowing] = useState<boolean>(false);

@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { json } from '../../utils/api';
-import { handleItems } from '../../utils/formService';
 import StoreSelector from '../shared/StoreSelector';
-
 
 export interface FormProps {
     id: number,
@@ -26,16 +24,10 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
 
     useEffect(() => { getItem() }, []);
 
-    const handleStore = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setStoreid(storeid);
-    };
-
     const handleText = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         try {
-            console.log('storeid-form', storeid)
             let body = { storeid }
             let result = await json(`api/lists/${id}`, 'PUT', body)
 
@@ -49,7 +41,6 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
     }
 
     return (
-
         <form className="form-group">
             <label htmlFor="user">{item}</label>
             <StoreSelector handlers={{ setStoreid }} values={{ storeid }} />
