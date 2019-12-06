@@ -4,11 +4,9 @@ import { json } from '../../utils/api';
 import { handleStores } from '../../utils/formService';
 import { Store } from '../shared/StoreSelector';
 
-export interface NewStoreProps {
-}
+export interface NewStoreProps { }
 
 const NewStore: React.SFC<NewStoreProps> = () => {
-
 
     const [stores, setStores] = useState<Store[]>([])
     const [newStore, setNewStore] = useState('');
@@ -68,7 +66,6 @@ const NewStore: React.SFC<NewStoreProps> = () => {
                         })}
                     </ul>
                     <form className="form-group p-3" onSubmit={(e) => handleSubmit(e)}>
-
                         <div>
                             <h4>Add a store:</h4>
                             <label htmlFor="store">Store Name</label>

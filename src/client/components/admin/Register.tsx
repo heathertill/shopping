@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
+import { wayToGo, confirmButton } from '../../utils/formService';
 import { RouteComponentProps } from 'react-router-dom';
 
 export interface RegisterProps extends RouteComponentProps { }
@@ -30,7 +30,7 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
                     let result = await json('/auth/login', 'POST', body);
                     if (result) {
                         SetAccessToken(result.token, { userid: result.userid, role: result.role });
-                        wayToGo()
+                        location.replace('/')
                     } else {
                         setRegisterStatus(false);
                         ClearAccessToken();
@@ -46,22 +46,11 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
         }
     };
 
-    const wayToGo = () => {
-        Swal.fire({
-            title: 'Welcome! Let\'s get shopping',
-            timer: 1500,
-            showConfirmButton: false,
-            onClose: () => {
-                history.push('/image');
-            }
-        })
-    }
-
     const registrationError = () => {
-    if (registerStatus === false) {
-        return <div className="alert alert-danger">There was a problem registering! Please try again.</div>
+        if (registerStatus === false) {
+            return <div className="alert alert-danger">There was a problem registering! Please try again.</div>
+        }
     }
-}
 
     return (
         <section className="container d-flex justify-content-center">

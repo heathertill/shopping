@@ -5,8 +5,7 @@ import { json, User } from '../../utils/api';
 import { GuestUser } from '../../views/MainView';
 import { wayToGo} from '../../utils/formService';
 
-export interface AdminNavProps {
-}
+export interface AdminNavProps { }
 
 const AdminNav: React.SFC<AdminNavProps> = () => {
 
@@ -40,9 +39,6 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
 
     useEffect(() => { handleUsers(), toShowAdmin() }, [])
 
-
-
-
     return (
         <>
             {showText && <div className="row">
@@ -66,9 +62,6 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
                                 </select>
                             </div>
                         </li>
-                        {/* <li className="nav-item mx-3 mt-2">
-                            <Link className="text-white " to="/singleList">Manage List</Link>
-                        </li> */}
                         <li className="nav-item mx-3 mt-2">
                             <Link className="text-white " to="/newstore">Add Store</Link>
                         </li>
@@ -79,7 +72,6 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
                             <Link className="text-white" to="/admin">Admin View</Link>
                         </li>
                     </div>
-
                 </ul>
             </div >}
         </>

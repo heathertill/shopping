@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
-import { wayToGo, getUser } from '../../utils/formService';
+import { wayToGo } from '../../utils/formService';
 
 export interface ImageProps extends RouteComponentProps { }
 
 const Image: React.SFC<ImageProps> = ({ history }) => {
 
     const fileInput = useRef<HTMLInputElement>();
-
-    const [show, setShow] = useState(false);
- 
 
     const handleImageChange = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -43,29 +40,6 @@ const Image: React.SFC<ImageProps> = ({ history }) => {
         
     }
 
-    const handleImage = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        console.log('file', fileInput.current.files[0].name)
-        // if (fileInput === undefined) {
-        //     wayToGo('No image selected')
-        // } else {
-        setShow(true);
-        // }
-
-    }
-
-    const showImage = () => {
-        // console.log('file', fileInput.current.files[0].name)
-        if (show === true) {
-            console.log('file', fileInput.current.files[0].name)
-            return (
-                <div className="mt-3">
-                    <img src={`https://heathers-projects.s3.us-east-2.amazonaws.com/shoppingImage-${fileInput.current.files[0].name}`} alt="test" id="test" />
-                </div>
-            )
-        }
-    }
-
     const returnToProfile = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         history.goBack();
@@ -81,13 +55,11 @@ const Image: React.SFC<ImageProps> = ({ history }) => {
                             <input ref={fileInput} accept=".JPG, .PNG, .JPEG" type="file" className="ml-1 form-control-file" />
                         </div>
                         <span className="d-flex justify-content-between">
-                            {/* <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleImage(e)} className="btn btn-dark w-25 mx-auto mt-3  shadow">Preview</button> */}
                             <button onClick={handleImageChange} className="btn btn-dark btn-block w-25 mx-auto mt-3 shadow">Submit Image</button>
                             <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => returnToProfile(e)} className="btn btn-dark w-25 mx-auto mt-3 shadow">Return to Profile</button>
                         </span>
                     </form>
                 </div>
-
             </section>
         </main>
     );

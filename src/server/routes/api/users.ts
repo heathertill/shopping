@@ -37,7 +37,16 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-
+router.delete('/:id', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        await queries.Users.deleteUser(id);
+        res.json({message: 'User deleted!'})
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
 
 
 

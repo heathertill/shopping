@@ -47,6 +47,18 @@ export const wayToGo = (message?: string, then?: any) => {
         showConfirmButton: false,
         onClose: () => {
             then;
+        } 
+    })
+}
+
+export const confirmButton = (message?: string, then?: any) => {
+    Swal.fire({
+        title: message,
+        timer: 3000,
+        showConfirmButton: true,
+        confirmButtonText: 'Close',
+        onClose: () => {
+            then;
         }
     })
 }
@@ -71,8 +83,6 @@ export const handleUserUpdate = async (e: React.MouseEvent<HTMLButtonElement>, u
     let body = {
         object
     }
-    console.log('ding')
-    console.log('fosv body', body.object)
     try {
         let result = await json(`/api/users/${userid}`, 'PUT', body.object)
         if (result) {

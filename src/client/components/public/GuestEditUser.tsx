@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { getUser, handleUserUpdate } from '../../utils/formService';
-import { User } from '../../utils/api';
+import { getUser, handleUserUpdate, wayToGo } from '../../utils/formService';
+import { User, json } from '../../utils/api';
 import { GuestUser } from '../../views/MainView';
 import Image from '../admin/Image';
 
@@ -34,14 +34,14 @@ const GuestEditUser: React.SFC<GuestEditUserProps> = ({ history, match: { params
     const handleRole = () => {
         if (User.role === 'admin') {
             return (
-                <div>
-                    <label className="mt-2" htmlFor="email">Role</label>
-                    <input type="text" className="form-control" value={role} placeholder={user.role}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} />
-                    <button type="submit" className="btn btn-dark my-3"
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleUserUpdate(e, Number(id), { role: role })}
-                    >Update Role</button>
-                </div>
+                    <div>
+                        <label className="mt-2" htmlFor="email">Role</label>
+                        <input type="text" className="form-control" value={role} placeholder={user.role}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} />
+                        <button type="submit" className="btn btn-dark my-3"
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleUserUpdate(e, Number(id), { role: role })}
+                        >Update Role</button>
+                    </div>
             )
         }
     }
@@ -68,7 +68,7 @@ const GuestEditUser: React.SFC<GuestEditUserProps> = ({ history, match: { params
                         >Update Email</button>
                     </div>
                     <div className="d-flex justify-content-between mt-3">
-                        <div className="col-5 p-0 mt-3"> 
+                        <div className="col-5 p-0 mt-3">
                             <label className="mt-2" htmlFor="email">Phone</label>
                             <input type="tel" className="form-control width-50" value={phone} placeholder={user.phone}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} />

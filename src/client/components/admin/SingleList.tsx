@@ -28,16 +28,16 @@ const SingleList: React.SFC<singleListProps> = () => {
     }
 
     const handlePurchase = (e: any, item: string, phone: string, id: number) => {
-        console.log('your item has been purchased', id)
+        e.preventDefault();
         let message = 'Your requested item, ' + item + ', has been purchased.'
         handleMessage(e, message, phone, id);
-        wayToGo('Purchased')
+        wayToGo('Purchased');
     }
 
     const handleDelete = (e: any, item: string, phone: string, id: number) => {
-        console.log('deleted')
         let message = 'Your requested item, ' + item + ', has been deleted. Please contact admin for further info.';
         handleMessage(e, message, phone, id);
+        wayToGo('Deleted')
     }
 
     return (
