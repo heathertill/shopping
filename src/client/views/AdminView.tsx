@@ -10,16 +10,11 @@ export interface AdminViewProps { }
 const AdminView: React.SFC<AdminViewProps> = () => {
 
     const [items, setItems] = useState<Item[]>([]);
-    // const [stores, setStores] = useState<AllStores[]>([]);
-
-    // let storeList = stores.filter(obj => obj.id > 0)
 
     const getItems = async () => {
         try {
             let items = await json('/api/lists');
             setItems(items);
-            // let stores = await json('/api/stores');
-            // setStores(stores);
         } catch (e) {
             console.log(e)
         }
@@ -30,10 +25,10 @@ const AdminView: React.SFC<AdminViewProps> = () => {
     return (
         <div>
             <div className="row justify-content-between" id="adminView">
-                <div className="col-5 bg-light p-4 mx-0">
+                <div className="col-5 bg-light px-3 py-4 mx-0">
                     <h3 className="p-2 text-center">Shopping List</h3>
                     <ul className="list-group list-group-flush mx-0 p-0">
-                        {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} />)}
+                        {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} image={item.image} />)}
                     </ul>
                 </div>
                 <div className="d-flex col-6 bg-light justify-content-center p-0">

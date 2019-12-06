@@ -1,7 +1,18 @@
 import { Router } from 'express';
 import queries from '../../db';
+import { async } from 'q';
 
 const router = Router();
+
+router.get('/', async (req, res, next) => {
+    try {
+        let users = await queries.Users.getUsers();
+        res.json(users)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
 
 router.get('/:id', async (req, res, next) => {
     let id = req.params.id

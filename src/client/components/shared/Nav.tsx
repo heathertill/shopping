@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { useState,  } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { User, ClearAccessToken } from '../../utils/api';
 
 export interface NavProps { }
 
 const Nav: React.SFC<NavProps> = () => {
-
- 
 
     const checkStatus = () => {
         if (User.userid !== null) {
@@ -17,11 +15,11 @@ const Nav: React.SFC<NavProps> = () => {
         }
     };
 
-    const adminView = () => {
-        if (User.role === 'admin') {
+    const allowRegister = () => {
+        if (User.role === null) {
             return (
                 <li className="nav-item mx-3">
-                    <Link className="text-white" to="/admin">Admin</Link>
+                    <Link className="text-white" to="/register">Register</Link>
                 </li>
             )
         }
@@ -44,9 +42,10 @@ const Nav: React.SFC<NavProps> = () => {
                     </li>
                     {/* {adminView()} */}
                 </div>
-                <li className="nav item mx-3">
+                {allowRegister()}
+                {/* <li className="nav item mx-3">
                     <Link className="text-white" to="/register">Register</Link>
-                </li>
+                </li> */}
             </ul>
             <div className="jumbotron jumbotron-fluid col-12 mb-3">
                 <h1 className="text-center">Shopping</h1>

@@ -53,7 +53,7 @@ const NewStore: React.SFC<NewStoreProps> = () => {
     return (
         <section>
             <div className="container d-flex justify-content-center">
-                <div className="col-md-8 border rounded shadow-lg">
+                <div className="col-md-8 border rounded shadow-lg mb-5">
                     <h3 className="text-center m-3">Manage Stores</h3>
                     <ul className="list-group list-group-flush p-3">
                         {list.map(store => {

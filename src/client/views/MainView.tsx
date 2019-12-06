@@ -16,9 +16,18 @@ export interface Item {
     storeid: number,
     store: string,
     _created: Date,
-    purchased: boolean
+    purchased: boolean,
+    image: string
 };
 
+export interface GuestUser {
+    id: number,
+    name: string,
+    email: string,
+    phone: string,
+    image: string,
+    role: string
+}
 
 export interface AllStores {
     id: number,
@@ -60,18 +69,31 @@ const MainView: React.SFC<MainViewProps> = () => {
         }
     }, []);
 
-    return (
-        <div className="row justify-content-between">
-            <div className="col-5 bg-light p-4 mx-0">
-                <h3 className="p-2 text-center">Shopping List</h3>
-                <ul className="list-group list-group-flush mx-0 p-0">
-                    {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} />)}
+    const border = () => {
+        if (User.role === null) {
+            return (<div className="row">
+                <ul className="nav col-12 mb-3 py-3 bg-dark justify-content-end">
+
                 </ul>
+            </div>)
+        }
+    }
+
+    return (
+        <>
+            {/* {border()} */}
+            <div className="row justify-content-between">
+                <div className="col-5 bg-light p-4 mx-0">
+                    <h3 className="p-2 text-center">Shopping List</h3>
+                    <ul className="list-group list-group-flush mx-0 p-0">
+                        {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} image={item.image} />)}
+                    </ul>
+                </div>
+                <div className="col-6 ">
+                    {addNewItem()}
+                </div>
             </div>
-            <div className="col-6 ">
-                {addNewItem()}
-            </div>
-        </div>
+        </>
     );
 }
 

@@ -19,6 +19,7 @@ export const handleItems = async (setItems: any) => {
     }
 };
 
+
 export const handleMessage = async (e: React.MouseEvent<HTMLButtonElement>, message: string, phone: string, itemid: number) => {
     e.preventDefault();
     let text = {
@@ -39,10 +40,10 @@ export const handleMessage = async (e: React.MouseEvent<HTMLButtonElement>, mess
     }
 };
 
-export const wayToGo = (then: any) => {
+export const wayToGo = (message?: string, then?: any) => {
     Swal.fire({
-        title: 'Way to go! Let\'s get Shopping!',
-        timer: 1000,
+        title: message,
+        timer: 1500,
         showConfirmButton: false,
         onClose: () => {
             then;
@@ -50,10 +51,34 @@ export const wayToGo = (then: any) => {
     })
 }
 
-export const getUser = async (user: number, setUser: any) => {
+export const getUser = async (setUser: any, userid?: number) => {
     try {
-        let result = await json(`/api/users/${user}`)
-        setUser(result)
+        if (userid) {
+            let user = await json(`/api/users/${userid}`)
+            setUser(user)
+        } else {
+            let user = await json('/api/users')
+            setUser(user)
+        }
+            
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const handleUserUpdate = async (e: React.MouseEvent<HTMLButtonElement>, userid: number, object: any) => {
+    e.preventDefault();
+    let body = {
+        object
+    }
+    console.log('ding')
+    console.log('fosv body', body.object)
+    try {
+        let result = await json(`/api/users/${userid}`, 'PUT', body.object)
+        if (result) {
+            wayToGo('Updated')
+            console.log(result)
+        }
     } catch (e) {
         console.log(e)
     }

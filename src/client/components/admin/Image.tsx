@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
-import { wayToGo } from '../../utils/formService';
+import { wayToGo, getUser } from '../../utils/formService';
 
-export interface AppProps extends RouteComponentProps { }
+export interface ImageProps extends RouteComponentProps { }
 
-const App: React.SFC<AppProps> = ({history}) => {
+const Image: React.SFC<ImageProps> = ({ history }) => {
 
     const fileInput = useRef<HTMLInputElement>();
 
     const [show, setShow] = useState(false);
+ 
 
-    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleImageChange = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(fileInput.current.files[0]);
-        const data = new FormData();
+        try {
+            const data = new FormData();
         data.append('avatar', fileInput.current.files[0]);
         let body = {
             data
@@ -29,23 +30,34 @@ const App: React.SFC<AppProps> = ({history}) => {
             try {
                 let worked = await json(`/api/users/${id}`, 'PUT', body)
                 if (worked) {
-                    wayToGo(history.push('/'))
+                    wayToGo('Your profile image has been changed', history.goBack())
                 }
             } catch (e) {
                 console.log(e)
             }
         }
+        } catch (e) {
+            console.log(e)
+            wayToGo('Please select a new image or click \'Return to Profile\'')
+        }
+        
     }
 
     const handleImage = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+        console.log('file', fileInput.current.files[0].name)
+        // if (fileInput === undefined) {
+        //     wayToGo('No image selected')
+        // } else {
         setShow(true);
+        // }
+
     }
 
-
-
     const showImage = () => {
+        // console.log('file', fileInput.current.files[0].name)
         if (show === true) {
+            console.log('file', fileInput.current.files[0].name)
             return (
                 <div className="mt-3">
                     <img src={`https://heathers-projects.s3.us-east-2.amazonaws.com/shoppingImage-${fileInput.current.files[0].name}`} alt="test" id="test" />
@@ -54,20 +66,24 @@ const App: React.SFC<AppProps> = ({history}) => {
         }
     }
 
+    const returnToProfile = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        history.goBack();
+    }
+
     return (
         <main className="container">
             <section className="row my-5 justify-content-center">
                 <div className="col-md-9">
                     <form className="form-group p-3 border shadow">
-                        <h3 className="text-center">Would you like to add a profile image?</h3>
-                        <span>
-                            <input ref={fileInput} type="file" className="form-control-file"/>
-                            {showImage()}
-                        </span>
+                        <h3 className="text-center">Select a new profile image</h3>
+                        <div className="border  p-3 mx-4">
+                            <input ref={fileInput} accept=".JPG, .PNG, .JPEG" type="file" className="ml-1 form-control-file" />
+                        </div>
                         <span className="d-flex justify-content-between">
-                            <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleImage(e)} className="btn btn-primary w-25 mx-auto mt-3  shadow">Preview</button>
-                            <button onClick={handleClick} className="btn btn-primary w-25 mx-auto mt-3 shadow">Submit</button>
-
+                            {/* <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleImage(e)} className="btn btn-dark w-25 mx-auto mt-3  shadow">Preview</button> */}
+                            <button onClick={handleImageChange} className="btn btn-dark btn-block w-25 mx-auto mt-3 shadow">Submit Image</button>
+                            <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => returnToProfile(e)} className="btn btn-dark w-25 mx-auto mt-3 shadow">Return to Profile</button>
                         </span>
                     </form>
                 </div>
@@ -77,4 +93,4 @@ const App: React.SFC<AppProps> = ({history}) => {
     );
 }
 
-export default App;
+export default Image;

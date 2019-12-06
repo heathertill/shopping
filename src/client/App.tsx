@@ -12,6 +12,8 @@ import StoreLists from './components/shared/StoreLists';
 import NewStore from './components/admin/NewStore';
 import AdminNav from './components/admin/AdminNav';
 import Image from './components/admin/Image';
+import GuestEditUser from './components/public/GuestEditUser';
+import UserNav from './components/shared/UserNav';
 
 export interface AppProps { }
 
@@ -22,6 +24,7 @@ const App: React.SFC<AppProps> = () => {
             <main className="container px-0">
                 <Nav />
                 <AdminNav />
+                <UserNav />
                 <Switch>
                     <Route exact path='/' component={MainView} />
                     <Route exact path='/admin' component={AdminView} />
@@ -30,7 +33,8 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/singleList' component={SingleList} />
                     <Route exact path='/storelist' component={StoreLists} />
                     <Route exact path='/newstore' component={NewStore} />
-                    <Route exact path='/image' component={Image}m/>
+                    <Route exact path='/image' component={Image} />
+                    <Route exact path='/guestEdit/:id' component={GuestEditUser} />
                 </Switch>
             </main>
         </BrowserRouter>

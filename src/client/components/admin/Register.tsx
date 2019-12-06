@@ -3,8 +3,6 @@ import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
 import { RouteComponentProps } from 'react-router-dom';
-import Image from './Image';
-// import { handleImage } from '../../utils/formService';
 
 export interface RegisterProps extends RouteComponentProps { }
 
@@ -12,6 +10,7 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('');
     const [registerStatus, setRegisterStatus] = useState(null);
 
@@ -20,10 +19,12 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
         let body = {
             name,
             email,
-            password
+            phone,
+            password,
         }
         try {
             let r = await json('/auth/register', 'POST', body);
+            console.log('body', body)
             if (r) {
                 try {
                     let result = await json('/auth/login', 'POST', body);
@@ -73,6 +74,9 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
                     <label className="mt-2" htmlFor="email">Email</label>
                     <input type="email" className="form-control"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                    <label className="mt-2" htmlFor="email">Phone</label>
+                    <input type="tel" className="form-control"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} />
                     <label className="mt-2" htmlFor="password">Password</label>
                     <input type="password" className="form-control"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />

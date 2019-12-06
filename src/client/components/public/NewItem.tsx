@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {RouteComponentProps} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { User, json } from '../../utils/api';
 
 export interface NewItemProps { }
 
 const NewItem: React.SFC<NewItemProps> = () => {
 
-    const [item, setItem] = useState('');
+    const [item, setItem] = useState<string>('');
+    const [saveStatus, setSaveStatus] = useState(null);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -16,21 +16,26 @@ const NewItem: React.SFC<NewItemProps> = () => {
             item
         }
         try {
-            let storeid = 0;
-            let body = { storeid };
-            let result = await json('/api/items', 'POST', newItem)
-            // setItem('')
-            location.reload()
+            if (newItem.item) {
+                let result = await json('/api/items', 'POST', newItem)
             if (result) {
-                await json(`/api/lists/${result[0]}`, 'PUT', body)
+                location.reload()
             } else {
-                return <div className="alert">There was a problem! Please try again.</div>
+                setSaveStatus(false)
+            }
+            } else {
+                setSaveStatus(false)
             }
         } catch (e) {
             console.log(e)
         }
     };
 
+    const handleError = () => {
+        if (saveStatus === false) {
+            return <div className="alert">There was a problem! Please try again.</div>
+        }
+    };
 
     return (
         <section className="bg-light mb-3 mx-n3 p-5">
@@ -40,6 +45,7 @@ const NewItem: React.SFC<NewItemProps> = () => {
                 <input type="text" className="form-control" value={item}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setItem(e.target.value)} />
                 <button type="submit" className="btn btn-secondary btn-block mt-4">Submit</button>
+                {handleError()}
             </form>
         </section>
     );

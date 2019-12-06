@@ -12,7 +12,9 @@ router.post('/', async (req, res, next) => {
         let user = {
             name: req.body.name,
             email: req.body.email,
-            password: hash
+            phone: req.body.phone,
+            password: hash,
+            image: req.body.image
         }
         let result: any = await queries.Users.createUser(user);
         let token = await CreateToken({ userid: result });

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Item } from '../../views/MainView';
 import { json } from '../../utils/api';
-import { handleMessage } from '../../utils/formService';
+import { handleMessage, wayToGo } from '../../utils/formService';
 import StoreSelector from '../shared/StoreSelector';
 
 export interface singleListProps {
@@ -31,6 +31,7 @@ const SingleList: React.SFC<singleListProps> = () => {
         console.log('your item has been purchased', id)
         let message = 'Your requested item, ' + item + ', has been purchased.'
         handleMessage(e, message, phone, id);
+        wayToGo('Purchased')
     }
 
     const handleDelete = (e: any, item: string, phone: string, id: number) => {
@@ -50,14 +51,20 @@ const SingleList: React.SFC<singleListProps> = () => {
                 <ul className="list-group list-group-flush p-3">
                     {items.map(item => {
                         return (
-                            <li className="list-group-item" key={item.id}>{item.item}
-                                <span className="float-right">
-                                    <button className="btn btn-dark mx-2"
+                            <li className="list-group-item d-flex justify-content-between px-0" key={item.id}>
+                                <div className="d-flex justify-content-start">
+                                    <div id="avatarDiv">
+                                        <img className="" src={item.image} id="avatar" />
+                                    </div>
+                                    <div className="pl-2 pt-2">{item.item}</div>
+                                </div>
+                                <div className="float-right">
+                                    <button className="btn btn-dark mr-2"
                                         onClick={(e) => handlePurchase(e, item.item, item.phone, item.id)}
                                     >Confirm</button>
-                                    <button className="btn btn-dark mx-2"
-                                    onClick={(e) => handleDelete(e, item.item, item.phone, item.id)}>Delete</button>
-                                </span>
+                                    <button className="btn btn-dark ml-2"
+                                        onClick={(e) => handleDelete(e, item.item, item.phone, item.id)}>Delete</button>
+                                </div>
                             </li>
                         )
                     })}

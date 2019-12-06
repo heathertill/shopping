@@ -2,12 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { json, SetAccessToken, ClearAccessToken } from '../../utils/api';
-import { RouteComponentProps } from 'react-router-dom';
-import {wayToGo} from '../../utils/formService'
 
-export interface LoginProps extends RouteComponentProps { }
+export interface LoginProps { }
 
-const Login: React.SFC<LoginProps> = ({ history }) => {
+const Login: React.SFC<LoginProps> = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,7 +35,7 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role })
                 if (result.role) {
                     setLogStatus(true);
-                    wayToGo(history.push('/'))
+                    location.replace('/')
                 }
             } else {
                 setLogStatus(false);
