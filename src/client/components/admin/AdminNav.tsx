@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { json, User } from '../../utils/api';
 import { GuestUser } from '../../views/MainView';
-import { wayToGo} from '../../utils/formService';
+import { wayToGo } from '../../utils/formService';
 
 export interface AdminNavProps { }
 
@@ -32,9 +32,9 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
         if (id === undefined) {
             wayToGo('Please select a user!')
         } else {
-            location.replace(`/guestEdit/${id}`) 
+            location.replace(`/guestEdit/${id}`)
         }
-        
+
     }
 
     useEffect(() => { handleUsers(), toShowAdmin() }, [])
@@ -63,13 +63,13 @@ const AdminNav: React.SFC<AdminNavProps> = () => {
                             </div>
                         </li>
                         <li className="nav-item mx-3 mt-2">
-                            <Link className="text-white " to="/newstore">Add Store</Link>
+                            <Link className="text-white " to="/newstore">Manage Stores</Link>
+                        </li>
+                        <li className="nav item mx-3 mt-2">
+                            <Link className="text-white" to="/admin">Select a List</Link>
                         </li>
                         <li className="nav-item mx-3 mt-2">
                             <Link className="text-white" to="/">Main View</Link>
-                        </li>
-                        <li className="nav item mx-3 mt-2">
-                            <Link className="text-white" to="/admin">Admin View</Link>
                         </li>
                     </div>
                 </ul>
