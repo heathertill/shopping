@@ -11,6 +11,15 @@ export default {
     },
     auth: {
         secret: process.env.SECRET
+    },
+    twilio: {
+        authToken: process.env.DB_TOKEN,
+        accountSID: process.env.DB_SID,
+        twilioNumber: process.env.DB_TWILIONUMBER
+    },
+    multer: {
+        secretAccessKey: process.env.DB_ACCESSKEY,
+        accessKeyId: process.env.DB_KEYID
     }
 }
 
