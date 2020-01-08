@@ -35,7 +35,6 @@ const List: React.SFC<ListProps> = ({ item: { id, item }, store }) => {
         <li className="list-group-item px-0 bg-light">
             <div className="d-flex w-100 justify-content-between">
                 {alertItem()}
-                {/* <p className="m-0 p-2" id={`store${store}`}>{item}</p> */}
                 {isAllowed()}
                 <CustomModal
                     isShowing={isShowing}

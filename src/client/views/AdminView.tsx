@@ -27,7 +27,7 @@ const AdminView: React.SFC<AdminViewProps> = () => {
             let items = await json('/api/lists');
             setItems(items);
             let stores = await json('/api/stores');
-            setStores(stores);
+            // setStores(stores);
         } catch (e) {
             console.log(e)
         }

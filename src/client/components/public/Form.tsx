@@ -23,7 +23,6 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
         try {
             let item = await json(`api/items/${id}`);
             setItem(item.item);
-            console.log('item', item.item)
         } catch (e) {
             console.log(e);
         }
@@ -47,9 +46,7 @@ const Form: React.SFC<FormProps> = ({ id, cantsee }) => {
             let result = await json(`api/lists/${id}`, 'PUT', body)
 
             if (result) {
-                console.log('storeid-form', storeid)
                 cantsee()
-                console.log('success')
                 location.reload()
             }
         } catch (e) {

@@ -5,7 +5,11 @@ import { Item } from '../../views/MainView';
 import { json } from '../../utils/api';
 import { useEffect } from 'react';
 
-export interface singleListProps extends RouteComponentProps<{ id: string }> { }
+export interface singleListProps extends RouteComponentProps<{ id: string }> {
+    values: {
+        storeid: number
+    }
+ }
 
 const SingleList: React.SFC<singleListProps> = ({ history, match: { params: { id } } }) => {
 
@@ -17,7 +21,6 @@ const SingleList: React.SFC<singleListProps> = ({ history, match: { params: { id
             let items = await json(`/api/lists/${id}`);
             setItems(items);
             setStore(items[0].store)
-            console.log('item', items[0])
         } catch (e) {
             console.log(e);
         }
@@ -49,6 +52,18 @@ const SingleList: React.SFC<singleListProps> = ({ history, match: { params: { id
     return (
         <div className="row">
             <div className="storeCard col-6 p-0 card ml-3 mr-0">
+                <div className="card-header bg-light text-center text-black w-100">
+                <select className="form-control col mr-2" value={values.storeid}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handlers.setStoreid(Number(e.target.value))}>
+                    <option>Select a Store</option>
+                    {storeList.map(store => {
+                        return (
+                            <option key={store.id} value={store.id}>{store.store}</option>
+                        )
+                    })}
+                </select>
+
+                </div>
                 <div className="card-header bg-light text-center text-black w-100">
                     <h4>{store}</h4>
                     <button className="mx-3"
