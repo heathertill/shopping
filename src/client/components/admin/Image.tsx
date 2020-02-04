@@ -19,6 +19,7 @@ const Image: React.SFC<ImageProps> = ({ history, match: { params: {id}} }) => {
             data
         }
             let result = await json('/multer', 'POST', body)
+            console.log('result', result)
         if (result) {
             let body = {
                 image: `https://heathers-projects.s3.amazonaws.com/shoppingImage-${fileInput.current.files[0].name}`
