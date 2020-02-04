@@ -23,6 +23,7 @@ const Register: React.SFC<RegisterProps> = ({ history }) => {
         }
         try {
             let r = await json('/auth/register', 'POST', body);
+            console.log('register', body)
             if (r) {
                 try {
                     let result = await json('/auth/login', 'POST', body);

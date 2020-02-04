@@ -33,7 +33,7 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/singleList' component={SingleList} />
                     <Route exact path='/storelist' component={StoreLists} />
                     <Route exact path='/newstore' component={NewStore} />
-                    <Route exact path='/image' component={Image} />
+                    <Route exact path='/image/:id' component={Image} />
                     <Route exact path='/guestEdit/:id' component={GuestEditUser} />
                 </Switch>
             </main>

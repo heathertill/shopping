@@ -22,3 +22,5 @@ export default {
         accessKeyId: process.env.DB_KEYID
     }
 }
+
+

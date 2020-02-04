@@ -79,7 +79,7 @@ const GuestEditUser: React.SFC<GuestEditUserProps> = ({ match: { params: { id } 
                                 <div className="">
                                     <img src={user.image} alt="test" id="test" />
                                 </div>
-                                <Link className="btn btn-dark mt-2" to="/image">Change Image</Link>
+                                <Link  className="btn btn-dark mt-2" to={`/image/${user.id}`}>Change Image</Link>
                             </div>
                         </div>
                     </div>

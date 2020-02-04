@@ -28,6 +28,7 @@ const AdminView: React.SFC<AdminViewProps> = () => {
                 <div className="col-5 bg-light px-3 py-4 mx-0">
                     <h3 className="p-2 text-center">Shopping List</h3>
                     <ul className="list-group list-group-flush mx-0 p-0">
+                        {/* {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} />)} */}
                         {items.map(item => <List key={item.id} item={item} store={item.storeid} id={item.id} user={item.userid} image={item.image} />)}
                     </ul>
                 </div>

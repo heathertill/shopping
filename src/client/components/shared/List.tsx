@@ -12,7 +12,8 @@ export interface ListProps {
     image: string
 }
 
-const List: React.SFC<ListProps> = ({ item: { id, item, image }, store }) => {
+// const List: React.SFC<ListProps> = ({ item: { id, item }, store }) => {
+    const List: React.SFC<ListProps> = ({ item: { id, item, image }, store }) => {
 
     const { isShowing, toggle } = useModal();
 

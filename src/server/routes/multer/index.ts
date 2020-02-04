@@ -25,7 +25,7 @@ const upload = multer({
 });
 
 router.post('/', upload.single('avatar'), (req, res) => {
-    console.log('req.file.location', req.file);
+    console.log('req.file.location', req.file.location);
     console.log('req.body', req.body);
     res.json('Blogs Test');
 })

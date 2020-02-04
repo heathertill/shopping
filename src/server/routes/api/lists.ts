@@ -6,6 +6,7 @@ const router = Router();
 router.get('/', async (req, res, next) => {
     try {
         let list = await queries.Items.storeItems();
+        console.log('ding*******************')
         res.json(list);
     } catch (e) {
         console.log(e)

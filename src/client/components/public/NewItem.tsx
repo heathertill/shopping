@@ -18,8 +18,9 @@ const NewItem: React.SFC<NewItemProps> = () => {
         try {
             if (newItem.item) {
                 let result = await json('/api/items', 'POST', newItem)
+                console.log('result', result)
             if (result) {
-                location.reload()
+                // location.reload()
             } else {
                 setSaveStatus(false)
             }

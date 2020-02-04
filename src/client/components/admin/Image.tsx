@@ -4,9 +4,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
 import { wayToGo } from '../../utils/formService';
 
-export interface ImageProps extends RouteComponentProps { }
+export interface ImageProps extends RouteComponentProps<{id: string}> { }
 
-const Image: React.SFC<ImageProps> = ({ history }) => {
+const Image: React.SFC<ImageProps> = ({ history, match: { params: {id}} }) => {
 
     const fileInput = useRef<HTMLInputElement>();
 
@@ -18,12 +18,12 @@ const Image: React.SFC<ImageProps> = ({ history }) => {
         let body = {
             data
         }
-        let result = await json('/multer', 'POST', body)
+            let result = await json('/multer', 'POST', body)
         if (result) {
-            let id = Number(User.userid);
             let body = {
                 image: `https://heathers-projects.s3.amazonaws.com/shoppingImage-${fileInput.current.files[0].name}`
             };
+            console.log('body', body)
             try {
                 let worked = await json(`/api/users/${id}`, 'PUT', body)
                 if (worked) {
